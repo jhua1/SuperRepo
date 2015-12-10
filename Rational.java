@@ -1,7 +1,7 @@
-//Team Coconut - James and Sungbin
+//James Hua
 //APCS1 pd10
-//HW41 -- In America, the Driver Sits on the Left
-//2015-12-3
+//HW45 -- Come Together
+//2015-12-09
 
 public class Rational implements Comparable {
 
@@ -127,8 +127,12 @@ public class Rational implements Comparable {
     }
 
     public int compareTo(Object o) {
-	if ( o instanceof Rational){
-	    
+	
+	if (!( o instanceof Comparable)){
+		throw new ClassCastException("My first error message!\n"+
+					     "compareTo() input not a Comparable");
+	    }
+	else{
 	    this.reduce();
 	    ((Rational)o).reduce();
 	    //Stimulates the idea of cross-multiplication so that the fractions have the same denominator, and then compares a and b which are the numerator values
@@ -144,8 +148,6 @@ public class Rational implements Comparable {
 		return 1;
 	    }
 	}
-	else
-	    return -1;
     }
 
     public boolean equals(Object r) {

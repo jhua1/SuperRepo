@@ -1,12 +1,12 @@
-//Team Same-Ling Cheng and James Hua
+//James Hua
 //APCS1 pd10
-//HW #44: This or That or Fourteen Other Things
-//2015-12-08
+//HW45 -- Come Together
+//2015-12-09
 
 //hexadecimal-> decimal: index value*16^distance from right
 //decimal -> hexadecimal: divide decimal by 16, remainder is rightmost value and recurse quotient
 
-public class Hexadecimal {
+public class Hexadecimal implements Comparable {
 
     private final static String HEXDIGITS= "0123456789ABCDEF";
     private int _decNum;
@@ -135,11 +135,7 @@ public class Hexadecimal {
       Object), or if this and other represent equal hexadecimal values
       =============================================*/
     public boolean equals( Object other ) { 
-	if (!(other instanceof Hexadecimal))
-	    throw new ClassCastException("\nMy first error message!"+
-					 "compareTo() input not a hexadecimal");
-	else{
-	    return this._hexNum.equals(((Hexadecimal)other)._hexNum);}	    
+        return (this==other || this.compareTo(other) == 0);	    
     }
 
     /*=============================================
@@ -148,12 +144,12 @@ public class Hexadecimal {
       post: Returns 0 if this Object is equal to the input Object,
       negative integer if this<input, positive integer otherwise
       =============================================*/
-    public int compareTo( Object other ) {
-	if (!(other instanceof Hexadecimal))
+    public int compareTo( Object o ) {
+	if (!(o instanceof Comparable))
 	    throw new ClassCastException("\nMy first error message!"+
-					 "compareTo() input not a hexadecimal");
+					 "compareTo() input not a Comparable");
 	else
-	    return this._decNum- ((Hexadecimal)other)._decNum;
+	    return this._decNum- ((Hexadecimal)o)._decNum;
     }
 
 

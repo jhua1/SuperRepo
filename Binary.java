@@ -1,13 +1,11 @@
 //James Hua
 //APCS1 pd10
-//HW43 -- This or That
-//2015-12-07
+//HW45 -- Come Together
+//2015-12-09
 
 //skeleton file for class Binary
 
-/* Attempted to write all of this without Math.pow and almost succeeded. Only time I needed Math.pow was when we change binary to decimal recursively because it requires a whole new method to keep track and utilize the powers of 2.
- */ 
-public class Binary {
+public class Binary implements Comparable{
 
     private int _decNum;
     private String _binNum;
@@ -163,9 +161,14 @@ public class Binary {
       post: Returns 0 if this Object is equal to the input Object,
       negative integer if this<input, positive integer otherwise
       =============================================*/
-    public int compareTo( Object other ) {
+    public int compareTo(Object o) {
 	/****** YOUR IMPLEMENTATION HURRR ******/
-	return (this._decNum - ((Binary)other)._decNum);
+	if (! (o instanceof Comparable)){
+	    throw new ClassCastException("My first error message!\n"
+					 +"compareTo() input not a Comparable");
+	}
+	else	    
+	    return (this._decNum - ((Binary)o)._decNum);
     }
 
 

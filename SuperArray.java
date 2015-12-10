@@ -1,7 +1,7 @@
-//Team Coconut - James and Sungbin
+//James Hua
 //APCS1 pd10
-//HW42 -- Array of Titanium
-//2015-12-6
+//HW45 -- Come Together
+//2015-12-09
 
 /*****************************
  * SKELETON for
@@ -18,11 +18,13 @@
  *  remove item (while maintaining "left-justification")
  *****************************/
 
+//This homework has
+
 public class SuperArray{
  
     //~~~~~INSTANCE VARS~~~~~
     //underlying container, or "core" of this data structure:
-    private int[] _data;
+    private Comparable[] _data;
 
     //position of last meaningful value
     private int _lastPos;
@@ -35,7 +37,7 @@ public class SuperArray{
     //default constructor – initializes 10-item array
     public SuperArray() 
     { 
-	_data = new int[10];
+	_data = new Comparable[10];
 	_lastPos = -1; //flag to indicate no lastpos yet
 	_size = 0;	
     }
@@ -60,7 +62,7 @@ public class SuperArray{
     //double capacity of this SuperArray
     private void expand() 
     { 
-	int[] temp = new int[ _data.length * 2 ];
+	Comparable[] temp = new Comparable[ _data.length * 2 ];
 	for( int i = 0; i < _data.length; i++ )
 	    temp[i] = _data[i];
 	_data = temp;
@@ -68,14 +70,14 @@ public class SuperArray{
 
 		
     //accessor -- return value at specified index
-    public int get( int index ) { return _data[index]; }
+    public Comparable get( int index ) { return _data[index]; }
 
 		
     //mutator -- set value at index to newVal, 
     //           return old value at index
-    public int set( int index, int newVal ) 
+    public Comparable set( int index, Comparable newVal ) 
     { 
- 	int temp = _data[index];
+ 	Comparable temp = _data[index];
 	_data[index] = newVal;
 	return temp;
     }
@@ -83,7 +85,7 @@ public class SuperArray{
 
     // ~~~~~~~~~~~~~~ PHASE II ~~~~~~~~~~~~~~
     //adds an item after the last item
-    public void add( int newVal ) {
+    public void add( Comparable newVal ) {
 	expand(); // make sure _data is large enough for the addition
 	set( _lastPos + 1, newVal );
 	_lastPos += 1;
@@ -93,7 +95,7 @@ public class SuperArray{
 
     //inserts an item at index
     //shifts existing elements to the right
-    public void add( int index, int newVal ) {
+    public void add( int index, Comparable newVal ) {
 	expand();
 	for( int i = _lastPos; i >= index; i-- ) {
 	    _data[i + 1] = _data[i]; // shifts every element one slot to the right from the right
@@ -109,7 +111,6 @@ public class SuperArray{
 	for( int i = index; i <= _lastPos; i++ ) {
 	    _data[i - 1] = _data[i]; // shifts from left to right
 	}
-	set( _lastPos, 0 );
 	_lastPos -= 1;
 	_size -= 1;
     }
@@ -117,11 +118,32 @@ public class SuperArray{
 
     //return number of meaningful items in _data
     public int size() { return _size; }
-    
 
+    //~~~~~~~~~~~~~~~~ Come Together ~~~~~~~~~~~~~~~~~~~~~~~~
+
+    public int linSearch(Comparable x){
+	int retind = -1;
+	for ( int a = 0; a < _size; a++){
+	    if (_data[a].compareTo(x) == 0)
+		retind = a;
+	}
+	return retind;
+    }
+
+    public boolean isSorted(){
+	boolean retboo = true;
+	for ( int x = 0 ; x < _lastPos; x++){
+	    if (!(_data[x].compareTo(_data[x+1]) <= 0))
+		retboo = false;
+	}
+	return retboo;
+    }
+    
+    //~~~~~~~~~~~~~~~ Testing ~~~~~~~~~~~~~~~~
     //main method for testing
     public static void main( String[] args ) 
     {
+	/*
 	SuperArray curtis = new SuperArray();
 	System.out.println("Printing empty SuperArray curtis...");
 	System.out.println(curtis);
@@ -174,40 +196,13 @@ public class SuperArray{
 	  mayfield.add(1,77);
 	  System.out.println("Printing SuperArray mayfield post-insert...");
 	  System.out.println(mayfield);
-	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	  //Test Cases so that ListInt works
-	  ListInt a = new SuperArray();
-	  System.out.println("Printing empty SuperArray a...");
-	  System.out.println(a);
-
-	  a.add(5);
-	  a.add(4);
-	  a.add(3);
-	  a.add(2);
-	  a.add(1);
-
-	  System.out.println("Printing populated SuperArray a...");
-	  System.out.println(a);
-
-    	  a.remove(3);
-	  System.out.println("Printing SuperArray a post-remove...");
-	  System.out.println(a);
-	  a.remove(3);
-	  System.out.println("Printing SuperArray a post-remove...");
-	  System.out.println(a);
-
-	  a.add(3,99);
-	  System.out.println("Printing SuperArray a post-insert...");
-	  System.out.println(a);
-	  a.add(2,88);
-	  System.out.println("Printing SuperArray a post-insert...");
-	  System.out.println(a);
-	  a.add(1,77);
-	  System.out.println("Printing SuperArray a post-insert...");
-	  System.out.println(a);
-
+	*/
 	//*****INSERT ANY ADDITIONAL TEST CALLS HERE*****
+	SuperArray same = new SuperArray();
+	same.add( new Binary(4));
+	same.add( new Hexadecimal(23));
+	System.out.println( same.isSorted());
+	
 
     }//end main
 		
